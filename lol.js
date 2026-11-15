@@ -6,7 +6,7 @@ const siguiente = (i) => (i + 1) % 12;
 const limpiar = (t) => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
 let mes = new Date().getMonth(), sector = 0, filtro = "todos";
-const lluviaSector = (s) => LLUVIA.map((v) => Math.round(v * SECTORES[s].factor));
+const lluviaSector = (s) => SECTORES[s].lluvia;
 
 /* ---------- LOGIN (panel lateral) ---------- */
 function panel(abrir) {
@@ -66,7 +66,8 @@ function mostrarAlerta(L) {
     texto = "Este mes llueve ~" + Math.round(ahora) + " mm y los próximos bajan a ~" + Math.round(prox) + " mm. Piense en riego.";
   }
   $("alerta").className = "alert " + clase;
-    document.body.className = "clima-" + clase;
+  // Cambia el fondo según el clima que se acerca: clima-lluvia, clima-seca o clima-igual
+  document.body.className = "clima-" + clase;
   $("alerta").innerHTML = "<b>" + titulo + "</b>" + texto;
 }
 
@@ -92,19 +93,21 @@ function dibujarGrafico(L) {
 function dibujarComparacion() {
   const vals = SECTORES.map((_, s) => lluviaSector(s)[mes]);
   const max = Math.max(...vals, 1);
-  $("tituloComp").textContent = "Lluvia en " + MESES[mes] + " por sector (mm)";
+  $("tituloComp").textContent = "Lluvia en " + MESES[mes] + " por sector (mm, escala ajustada)";
   $("comparar").innerHTML = SECTORES.map((s, i) =>
     '<div class="fila' + (i === sector ? " sel" : "") + '"><span class="nom">' + s.nombre +
-    '</span><div class="pista"><div class="barra-v" style="width:' + (vals[i] / max) * 100 + '%"></div></div>' +
+    '</span><div class="pista"><div class="barra-v" style="width:' + Math.sqrt(vals[i] / max) * 100 + '%"></div></div>' +
     '<span class="mm">' + vals[i] + "</span></div>"
   ).join("");
 }
 
 /* ---------- CULTIVOS (con buscador y filtro) ---------- */
 function mostrarCultivos(L) {
+  $("cultivos").parentElement.querySelector("h2").textContent = "Cultivos en " + SECTORES[sector].nombre;
+  $("cultivos").parentElement.querySelector("h2").title = SECTORES[sector].info;
   const m = mes + 1, lluvia = (L[mes] + L[siguiente(mes)]) / 2;
   const q = limpiar($("buscar").value.trim());
-  const lista = CULTIVOS.map((c) => {
+  const lista = SECTORES[sector].cultivos.map((c) => {
     let orden, etiqueta, clase, texto;
     if (c.siembra.includes(m)) {
       if (lluvia >= c.minLluvia) { orden = 0; etiqueta = "Sembrar ahora"; clase = "t-ok"; texto = "Mes de siembra y hay lluvia suficiente."; }
