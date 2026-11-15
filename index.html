@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Qué sembrar este mes? · Valle de Cochabamba</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="nuevo.css">
+</head>
+  <body>
+  <div id="clima" class="clima" aria-hidden="true"></div>
+
+ 
+  <!-- BARRA SUPERIOR: título, usuario y botones -->
+  <header class="top">
+    <div class="top-in">
+      <div>
+        <h1>¿Qué sembrar este mes?</h1>
+        <p class="sub">Valle de Cochabamba</p>
+      </div>
+      <div class="user">
+        <span id="saludo"></span>
+        <button id="abrirLogin" class="btn" type="button">Ingresar</button>
+      </div>
+    </div>
+    <div class="top-in controles">
+      <div class="grupo"><span class="et">Sector</span><div id="sectores" class="btns"></div></div>
+      <div class="grupo"><span class="et">Mes</span><div id="meses" class="btns"></div></div>
+    </div>
+  </header>
+
+  <main id="app">
+    <div id="alerta" class="alert"></div>
+
+    <div class="grid">
+      <section class="card">
+        <h2 id="tituloGrafico">Lluvia por mes (mm)</h2>
+        <svg id="grafico" viewBox="0 0 360 170"></svg>
+        <div class="legend">
+          <span><i class="c-mes"></i>Mes elegido</span>
+          <span><i class="c-prox"></i>Próximos 2 meses</span>
+          <span><i class="c-otro"></i>Otros meses</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 id="tituloComp"></h2>
+        <div id="comparar"></div>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>Cultivos para este mes</h2>
+      <div class="herr">
+        <input id="buscar" type="search" placeholder="Buscar cultivo (ej. papa)">
+        <div class="btns filtros">
+          <button class="btn activo" data-f="todos" type="button">Todos</button>
+          <button class="btn" data-f="ahora" type="button">Sembrar ahora</button>
+        </div>
+      </div>
+      <div id="cultivos"></div>
+    </section>
+  </main>
+
+  <!-- LOGIN: panel lateral -->
+  <div id="fondo" class="fondo oculto"></div>
+  <aside id="login" class="panel" aria-label="Ingresar">
+    <button id="cerrarLogin" class="btn cerrar" type="button" aria-label="Cerrar">✕</button>
+    <form id="formLogin">
+      <h2>Ingresar</h2>
+      <p class="sub">Entra para ver tus siembras</p>
+      <label for="usuario">Usuario</label>
+      <input id="usuario" autocomplete="username">
+      <label for="clave">Contraseña</label>
+      <input id="clave" type="password" autocomplete="current-password">
+      <p id="error" class="error" role="alert"></p>
+      <button class="btn activo grande" type="submit">Entrar</button>
+      <p class="sub">Prueba: agricultor / 1234</p>
+    </form>
+  </aside>
+
+  <script src="datos.js"></script>
+  <script src="lol.js"></script>
+</body>
+</html>

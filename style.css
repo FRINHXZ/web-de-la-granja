@@ -1,0 +1,87 @@
+/* ===== COLORES ===== */
+:root {
+  --fondo: #f1f5ef; --tarjeta: #ffffff; --texto: #1c2a22; --gris: #5a6b61; --linea: #d6e0d4;
+  --lluvia: #2f6fa3; --lluvia-suave: #bcd6ea;
+  --ok: #2f7a38; --ok-fondo: #e0f0e0;
+  --aviso: #9a6212; --aviso-fondo: #fbefd5;
+  --prox: #245d8a; --prox-fondo: #dfeaf5;
+  --espera: #5a6b61; --espera-fondo: #e9eee8;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fondo); color: var(--texto); font-family: system-ui, Arial, sans-serif; font-size: 17px; line-height: 1.45; }
+h1 { font-size: 1.6rem; line-height: 1.2; margin: 0 0 4px; }
+h2 { font-size: 1.1rem; margin: 0 0 10px; }
+.sub { color: var(--gris); margin: 0 0 16px; font-size: 1rem; }
+label { font-weight: bold; display: block; margin-bottom: 6px; }
+svg { display: block; width: 100%; height: auto; }
+.oculto { display: none !important; }
+
+/* ===== BARRA SUPERIOR ===== */
+.top { position: sticky; top: 0; z-index: 5; background: var(--fondo); border-bottom: 1px solid var(--linea); padding: 10px 16px; }
+.top-in { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.top h1 { font-size: 1.25rem; margin: 0; }
+.top .sub { margin: 0; font-size: 0.85rem; }
+.user { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--gris); }
+.controles { margin-top: 8px; flex-wrap: wrap; justify-content: flex-start; gap: 6px 22px; align-items: flex-start; }
+.grupo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.et { font-size: 0.85rem; font-weight: bold; color: var(--gris); }
+
+/* ===== BOTONES COMPACTOS ===== */
+.btns { display: flex; flex-wrap: wrap; gap: 4px; }
+.btn { font: inherit; font-size: 0.85rem; font-weight: bold; padding: 5px 10px; cursor: pointer; border-radius: 8px; border: 2px solid var(--linea); background: var(--tarjeta); color: var(--texto); }
+.btn:hover { border-color: var(--lluvia); }
+.btn.activo { background: var(--lluvia); border-color: var(--lluvia); color: #fff; }
+.btn.grande { width: 100%; padding: 10px; font-size: 1rem; }
+.btn:focus-visible, input:focus { outline: 3px solid var(--lluvia-suave); border-color: var(--lluvia); }
+
+/* ===== CONTENIDO ===== */
+#app { max-width: 1000px; margin: 0 auto; padding: 8px 16px 40px; }
+.grid { display: grid; grid-template-columns: 1fr; gap: 0 16px; }
+@media (min-width: 820px) { .grid { grid-template-columns: 1.3fr 1fr; } }
+.card { background: var(--tarjeta); border-radius: 14px; padding: 16px; margin: 12px 0; }
+
+input { width: 100%; font: inherit; padding: 10px; margin-bottom: 12px; border-radius: 10px; border: 2px solid var(--linea); background: var(--tarjeta); color: var(--texto); }
+.herr { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+.herr input { flex: 1; min-width: 180px; margin: 0; }
+.error { color: #a32d2d; min-height: 1.4em; margin: 0 0 8px; font-weight: bold; }
+
+/* ===== AVISO DE LLUVIAS ===== */
+.alert { margin: 12px 0; padding: 14px 16px; border-radius: 14px; border-left: 8px solid var(--lluvia); background: var(--tarjeta); }
+.alert b { display: block; font-size: 1.2rem; margin-bottom: 2px; }
+.alert.seca { border-left-color: var(--aviso); }
+.alert.igual { border-left-color: var(--espera); }
+
+/* ===== LEYENDA ===== */
+.legend { display: flex; gap: 16px; flex-wrap: wrap; color: var(--gris); font-size: 0.9rem; margin-top: 8px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; }
+.c-mes { background: var(--lluvia); }
+.c-prox { background: var(--lluvia-suave); outline: 2px solid var(--lluvia); outline-offset: -2px; }
+.c-otro { background: var(--linea); }
+
+/* ===== COMPARACIÓN POR SECTOR ===== */
+#comparar .fila { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.95rem; }
+#comparar .nom { width: 96px; flex: none; }
+#comparar .pista { flex: 1; background: var(--linea); border-radius: 6px; height: 18px; }
+#comparar .barra-v { height: 100%; border-radius: 6px; background: var(--lluvia-suave); }
+#comparar .fila.sel .barra-v { background: var(--lluvia); }
+#comparar .fila.sel .nom { font-weight: bold; }
+#comparar .mm { width: 52px; text-align: right; flex: none; }
+.vacio { color: var(--gris); padding: 12px 0; }
+
+/* ===== LISTA DE CULTIVOS ===== */
+.crop { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--linea); }
+.crop:first-child { border-top: 0; }
+.crop .n { font-weight: bold; font-size: 1.1rem; }
+.crop .d { color: var(--gris); font-size: 0.9rem; }
+.tag { flex: none; padding: 6px 12px; border-radius: 999px; font-weight: bold; font-size: 0.9rem; text-align: center; }
+.t-ok { background: var(--ok-fondo); color: var(--ok); }
+.t-aviso { background: var(--aviso-fondo); color: var(--aviso); }
+.t-prox { background: var(--prox-fondo); color: var(--prox); }
+.t-espera { background: var(--espera-fondo); color: var(--espera); }
+
+/* ===== PANEL LATERAL DE LOGIN ===== */
+.fondo { position: fixed; inset: 0; background: rgba(28, 42, 34, 0.35); z-index: 9; }
+.panel { position: fixed; top: 0; right: 0; height: 100%; width: min(340px, 90vw); background: var(--tarjeta); padding: 24px 20px; z-index: 10; box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15); transform: translateX(100%); transition: transform 0.25s; }
+.panel.abierto { transform: none; }
+.cerrar { position: absolute; top: 12px; right: 12px; }
+@media (prefers-reduced-motion: reduce) { .panel { transition: none; } }
